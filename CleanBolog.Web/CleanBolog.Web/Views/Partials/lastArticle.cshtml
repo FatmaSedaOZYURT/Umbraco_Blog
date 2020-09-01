@@ -1,0 +1,72 @@
+﻿@inherits CleanBologViewPage
+@using CleanBolog.Core.ViewPages
+@using CleanBolog.Core.Helper
+@{
+
+    var result = ArticleService.GetLatestArticles(Model, Request);
+
+}
+
+@if (result != null)
+{
+    var articles = result.Results.Cast<Article>();
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                @foreach (var article in articles)
+                {
+                    <div class="post-preview">
+                        <a href="@article.Url">
+                            <h2 class="post-title">
+                                @(!string.IsNullOrEmpty(article.Title) ? article.Title : article.Name)
+                            </h2>
+                            <h3 class="post-subtitle">
+                                @(!string.IsNullOrEmpty(article.Subtitle) ? article.Subtitle : "")
+                            </h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted
+                            @(!string.IsNullOrEmpty(article.AuthorName) ? "by " + article.AuthorName +" " : "")
+                            on @article.ArticleDate
+                        </p>
+                    </div>
+                    <hr>
+                }
+                @if (result.IsArticleListPage)
+                {
+                    if (result.PageCount > 1)
+                    {
+                        <div class="paging-block">
+                            @if (result.PageNumber > 1)
+                            {
+                                <a class="btn btn-primary float-left" href="@($"{Model.Url}?page={result.PageNumber - 1}&size={result.PageSize}")">Prev</a>
+                            }
+                            else
+                            {
+                                Html.Raw("&nbsp");
+                            }
+                        </div>
+                        <div class="paging-block text-center">
+                            <span>Page @result.PageNumber of @result.PageCount</span>
+                        </div>
+                        <div class="paging-block">
+                            @if (result.PageNumber < result.PageCount)
+                            {
+                                <a class="btn btn-primary float-right" href="@($"{Model.Url}?page={result.PageNumber + 1}&size={result.PageSize}")">Next</a>
+                            }
+                            else
+                            {
+                                Html.Raw("&nbsp");
+                            }
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <a class="btn btn-primary float-right" href="@(Model.Url)">Older Posts &rarr;</a>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Web.PublishedModels.Home>
+@{
+    Layout = "master.cshtml";
+    var message = Model.LeavingMessage;
+}
+@Html.Partial("~/Views/Partials/pageHeader.cshtml")
+@Html.CachedPartial("~/Views/Partials/lastArticle.cshtml",Model,3600,true);
+
+@section sections{
+
+    <script>
+        //If you want to set the leave message you can set it from the page you are using it on and then call the init method
+        PDG.leaveMessage = "@Html.Raw(message)";
+        PDG.init();
+    </script>
+    
+    }

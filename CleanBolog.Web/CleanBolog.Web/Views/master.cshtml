@@ -1,0 +1,70 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+
+@using ClientDependency.Core.Mvc
+
+@{
+    Layout = null;
+
+    Html.RequiresCss("/Template/vendor/bootstrap/css/bootstrap.min.css");
+    Html.RequiresCss("/Template/vendor/fontawesome-free/css/all.min.css");
+    Html.RequiresCss("https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic");
+    Html.RequiresCss("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800");
+    Html.RequiresCss("/Template/css/clean-blog.min.css");
+
+
+    Html.RequiresJs("/Scripts/lazysize.min.js", new { async = "async" });
+    Html.RequiresJs("/Scripts/ls.unveilhooks.min.js", new { async = "async" });
+    Html.RequiresJs("/Template/vendor/jquery/jquery.min.js");
+    Html.RequiresJs("/Template/vendor/bootstrap/js/bootstrap.bundle.min.js");
+    Html.RequiresJs("/Template/js/clean-blog.min.js");
+    Html.RequiresJs("/Scripts/dontGo.js");
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Clean Blog - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    @*<link href="~/Template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+
+
+    <!-- Custom fonts for this template -->
+    @*<link href="~/Template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />*@
+
+    @*<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>*@
+    @*<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>*@
+
+    <!-- Custom styles for this template -->
+    @*<link href="~/Template/css/clean-blog.min.css" rel="stylesheet" />*@
+    
+    @Html.RenderCssHere()
+
+</head>
+
+<body>
+
+    @Html.Partial("~/Views/Partials/navigator.cshtml")
+    @RenderBody()
+    <hr>
+    @Html.Partial("~/Views/Partials/footer.cshtml")
+
+    @Html.RenderJsHere()
+    <!-- Bootstrap core JavaScript -->
+    @*<script src="~/Template/vendor/jquery/jquery.min.js"></script>*@
+    @*<script src="~/Template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+
+    <!-- Custom scripts for this template -->
+    @*<script src="~/Template/js/clean-blog.min.js"></script>*@
+    @RenderSection("sections",false)
+</body>
+
+</html>
